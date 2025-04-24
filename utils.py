@@ -131,7 +131,7 @@ def tts_by_fold_indexes(S, folds_i):
 
 
 def get_splitter(task, n_folds):
-    if task == "class":
+    if task in ("binary", "multiclass"):
         return StratifiedKFold(n_splits=n_folds, shuffle=True, random_state=42)
     else:
         return KFold(n_splits=n_folds, shuffle=True, random_state=42)

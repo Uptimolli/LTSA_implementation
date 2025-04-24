@@ -11,7 +11,7 @@ def CV_boosting(data, target, test_data, task="binary", n_folds=5, cb_params=Non
     Parameters:
     - data: pandas DataFrame with features and target
     - target: name of the target column
-    - task: 'binary' or 'multiclas' for classification or 'reg' for regression
+    - task: 'binary' or 'multiclass' for classification or 'reg' for regression
     - n_folds: number of folds for cross-validation
     - params: dictionary of parameters for the boosting model
     - verbose: whether to print progress information
