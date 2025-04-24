@@ -12,7 +12,8 @@ parser.add_argument('--verbose', type=int, default=0, help='Verbosity level')
 parser.add_argument('--n_seeds', type=int, default=5, help='Number of seeds to run')
 parser.add_argument('--start_seed', type=int, default=49, help='Starting seed value')
 parser.add_argument('--dataset', type=str, default="jobs", help='Dataset to use')
-parser.add_argument('--CV', type=int, default=5, help='Cross-val folds number')
+parser.add_argument('--cv', type=int, default=5, help='Cross-val folds number')
+parser.add_argument('--n_trials', type=int, default=50, help='Optuna trials number')
 parser.add_argument('--partition_algo_name', "--pan", type=str, default="cluster_tree", help='Name of partition algorithm')
 
 args = parser.parse_args()
@@ -21,8 +22,9 @@ verbose = args.verbose
 N_SEEDS = args.n_seeds
 START_SEED = args.start_seed
 dataset = args.dataset
-CV = args.CV
+CV = args.cv
 partition_algo_name = args.partition_algo_name
+N_TRIALS = args.n_trials
 
 dct_of_shorts = {"ct": "cluster_tree", "km": "kmeans"}
 partition_algo_name = dct_of_shorts.get(partition_algo_name, partition_algo_name)
@@ -83,5 +85,5 @@ def objective(trial):
 
 if __name__ == "__main__":
     study = optuna.create_study(direction="maximize")
-    study.optimize(objective, show_progress_bar=True, n_trials=50)
+    study.optimize(objective, show_progress_bar=True, n_trials=N_TRIALS)
     print(f"Best params is {study.best_params} with value {study.best_value}")

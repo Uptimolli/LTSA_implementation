@@ -10,7 +10,7 @@ from utils import tts_by_fold_indexes
 
 
 def get_partition_by_kmeans(X, y, n_clusters=5):
-    km = KMeans(n_clusters=n_clusters, random_state=42)
+    km = KMeans(n_clusters=n_clusters, n_init=10, random_state=42)
 
     partition = km.fit_predict(X, y)
     partition_list = []
